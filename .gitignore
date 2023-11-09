@@ -1,0 +1,4 @@
+codegen/
+*.mexw64
+*.ini
+*.asv
