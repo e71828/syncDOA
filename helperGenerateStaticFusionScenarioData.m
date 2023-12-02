@@ -80,12 +80,12 @@ esm = fusionRadarSensor(1, 'No scanning', ...
     'UpdateRate',ts.UpdateRate,...
     'ElevationResolution',1);
 
-r = 1e3;
+r = 6e3;
 numSensors = 5;
 thetaSpan = pi/7*numSensors;
 theta = linspace(-thetaSpan,thetaSpan,numSensors)/2 + pi/2;
 xSen = r*cos(theta);
-ySen = -r*sin(theta);
+ySen = zeros(numSensors,1); %-r*sin(theta);
 locationIDs = [4 3 2 5 1];
 
 for i = 1:numSensors
@@ -101,15 +101,15 @@ jammer = radarEmitter(1, 'No scanning','FieldOfView',[360 180]);
 
 numTargets = 5;
 % Targets in a straight line
-yTgt = 5e2*ones(1,numTargets);
-xTgt = linspace(-800,800,numTargets);
+yTgt = 5e2*ones(1,numTargets)*5+1e3;
+xTgt = linspace(-5000,5000,numTargets);
 
 % Pick a velocity for each target in the plane.
 velocity = [-5 5;
             -3 3;
             0 5;
             3 3;
-            5 5];
+            5 5]*10;
 
 for i = 1:numTargets
     tgtPlat = platform(ts,'Trajectory',kinematicTrajectory('Position',...
@@ -117,7 +117,7 @@ for i = 1:numTargets
     tgtPlat.Emitters = {clone(jammer)};
 end
 
-tp = helperStaticFusionDisplay(ts,'XLim',[-2 2],'YLim',[-2 2]);
+tp = helperStaticFusionDisplay(ts,'XLim',[-8 8],'YLim',[-1 15]);
 
 end
 

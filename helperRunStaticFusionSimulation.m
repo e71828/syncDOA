@@ -8,8 +8,8 @@ if nargin == 3
     isMex = false;
 end
 
-theaterDisplay.TheaterPlot.XLimits = [-2 2];
-theaterDisplay.TheaterPlot.YLimits = [-2 2];
+theaterDisplay.TheaterPlot.XLimits = [-8 8];
+theaterDisplay.TheaterPlot.YLimits = [-1 15];
 
 % Clear track history
 tp = theaterDisplay.TheaterPlot;
