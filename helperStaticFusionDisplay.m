@@ -528,6 +528,7 @@ classdef (Hidden) helperStaticFusionDisplay < matlab.System
                 tp = theaterPlot('Parent',hax,'XLimits',obj.XLim,'YLimits',obj.YLim,'ZLimits',obj.ZLim);
                 obj.pTheaterPlot = tp;
                 h = legend;
+                h.Location = "northeast";
                 h.String{1} = 'Ground';
                 
                 % Find the platforms defined in this scenario

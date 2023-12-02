@@ -132,7 +132,7 @@ for iter = 1:numel(detectionBuffer)
     noiseDetections = addNoise(availableDetections,measNoise);
     
     % Fuse noisy detections using fuser
-    fusedDetections = fuser(noiseDetections);
+    fusedDetections = mexFuser_mex(noiseDetections);
     
     % Run a tracker on fused detections
     confTracks = tracker(fusedDetections,time);
@@ -151,7 +151,7 @@ for iter = 1:numel(detectionBuffer)
 end
 axes(theaterDisplay.TheaterPlot.Parent);
 %%
-ylim([0 1.5]);
+% ylim([0 1.5]);
 %%
 % Results from tracking using three sensors with 0.01 degrees-squared of
 % noise covariance can be summarized using the assignment metrics. Note
@@ -192,7 +192,7 @@ measNoise = 2; %standard deviation of sqrt(2) degrees
 [trackingMetrics,errorMetrics] = helperRunStaticFusionSimulation(detectionBuffer,truthLog,numSensors,measNoise,theaterDisplay,false);
 axes(theaterDisplay.TheaterPlot.Parent);
 %%
-ylim([0 1.5]);
+% ylim([0 1.5]);
 %%
 % Note that a few tracks were confirmed and then dropped in this
 % simulation. Poor static association accuracy leads to ghost target
@@ -273,11 +273,11 @@ end
 %%
 % You can verify the speed-up achieved by code generation by comparing the
 % time taken by them for fusing one frame of detections
-testDetections = addNoise(vertcat(detectionBuffer{1}{1:5}),1);
-tic;mexFuser(testDetections);t_ML = toc;
-tic;mexFuser_mex(testDetections);t_Mex = toc;
-disp(['MATLAB Code Execution time = ',num2str(t_ML)]);
-disp(['MEX Code Execution time = ',num2str(t_Mex)]);
+% testDetections = addNoise(vertcat(detectionBuffer{1}{1:5}),1);
+% tic;mexFuser(testDetections);t_ML = toc;
+% tic;mexFuser_mex(testDetections);t_Mex = toc;
+% disp(['MATLAB Code Execution time = ',num2str(t_ML)]);
+% disp(['MEX Code Execution time = ',num2str(t_Mex)]);
 
 %% Track with Five Sensors
 % In this section, detections from all five sensors are used for tracking
@@ -286,11 +286,11 @@ disp(['MEX Code Execution time = ',num2str(t_Mex)]);
 % keyboard;
 showScenario(theaterDisplay); 
 measNoise = 2; % Same noise as 3 sensors
-numSensors = 5;
+numSensors = 3;
 [trackingMetrics,errorMetrics] = helperRunStaticFusionSimulation(detectionBuffer,truthLog,numSensors,measNoise,theaterDisplay,true);
 axes(theaterDisplay.TheaterPlot.Parent);
 %%
-ylim([0 1.5]);
+% ylim([0 1.5]);
 
 %%
 % The assignment results from tracking using five sensors show that all
