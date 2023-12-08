@@ -63,7 +63,7 @@ for iter = 1:numel(detectionBuffer)
     % Run a tracker on fused detections
     confTracks = tracker(fusedDetections,time);
     if iter == 55 || iter == 80
-        keyboard;
+        % keyboard;
     end
     
     % Update track and assignment metrics
