@@ -91,15 +91,6 @@ showGrabs(theaterDisplay,[]);
 % Number of sensors
 numSensors = 3;
 
-% Create a detection fuser using triangulateLOS function as the
-% MeasurementFusionFcn and specify parameters of sensors.
-fuser = staticDetectionFuser('MeasurementFusionFcn',@triangulateLOS,...
-    'MaxNumSensors',numSensors,...
-    'UseParallel',true,...
-    'FalseAlarmRate',1e-3,...
-    'Volume',3,...
-    'DetectionProbability',0.99);
-
 % Tracking using a GNN tracker
 tracker = trackerGNN('AssignmentThreshold',45,...
     'ConfirmationThreshold',[3 5],'DeletionThreshold',[4 5]);
@@ -205,6 +196,7 @@ assignmentTable(:,{'TrackID','AssignedTruthID','TotalLength','FalseTrackStatus'}
 % The estimated error for each truth is higher. Notice that the track
 % jumps in the theater display above.
 disp(cumulativeTruthMetrics(errorMetrics));
+
 %% Summary
 % This example showed how to track objects using a network of distributed
 % passive sensors. You learned how to use |staticDetectionFuser| to
